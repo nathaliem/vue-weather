@@ -1,7 +1,7 @@
 <template>
     <div class="searchform">
         <form v-on:submit.prevent="onSubmit" v-if="showForm">
-            <button v-on:click.prevent="toggleForm">Hide</button>
+            <button type="button" v-on:click.prevent="toggleForm">Hide</button>
             <input type="text" name="search" id="search" ref="search" placeholder="Search for your city" autofocus />
             <input type="submit" value="Search" />
         </form>
@@ -47,7 +47,6 @@ export default {
 }
 .searchform button,
 .searchform--toggle button {
-    display: block;
     width: 100%;
     text-align: center;
     margin-bottom: 0.5em;

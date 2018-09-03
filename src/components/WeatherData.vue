@@ -1,7 +1,7 @@
 <template>
     <div class="weatherdata">
         <h1>{{ city }}</h1>
-        <h2 title="data.description">{{ data.temp }} <span>°C</span></h2>
+        <h2 v-if="data.temp" title="data.description">{{ data.temp }} <span>°C</span></h2>
     </div>
 </template>
 

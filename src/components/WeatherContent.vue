@@ -28,7 +28,7 @@ export default {
   watch: {
       city() {
           if (this.city) {
-            this.loadCityImage();
+              this.getWeather();
           }
       }
   },
@@ -39,8 +39,7 @@ export default {
   },
   methods: {
       getWeather() {
-          console.log('get weather');
-          this.$http.get('//api.openweathermap.org/data/2.5/weather', {
+          this.$http.get('https://api.openweathermap.org/data/2.5/weather', {
               params: {
                   q: this.city,
                   APPID: keys.openweathermap.key,
@@ -52,19 +51,18 @@ export default {
                   icon: res.body.weather[0].icon,
                   temp: res.body.main.temp
               }
-              this.loadCityImage();
+              this.loadCityImage(this.weatherData.description);
           }).catch(err => {
-              console.log(err);
+              console.error(err);
           });
       },
-      loadCityImage() {
-          console.log('get image');
+      loadCityImage(weather = '') {
           this.$http.get('https://api.flickr.com/services/rest', 
           {
               params: {
                   method: 'flickr.photos.search',
                   api_key: keys.flickr.key,
-                  text: this.city + ' ' + this.weatherData.description,
+                  text: this.city + ' ' + weather,
                   safe_search: 1,
                   content_type: 1,
                   media: 'photos',
@@ -78,9 +76,12 @@ export default {
               const photos_with_url = res.body.photos.photo.filter(obj => {
                   return typeof obj.url_h !== 'undefined';
               });
-              const index = Math.floor(Math.random() * Math.floor(photos_with_url.length - 1));
-              this.url = photos_with_url[index].url_h;
-              console.log(this.url);
+              if (photos_with_url.length > 0) {
+                    const index = Math.floor(Math.random() * Math.floor(photos_with_url.length - 1));
+                    this.url = photos_with_url[index].url_h;
+              } else {
+                    this.loadCityImage(); // load without weather search query
+              }
           }).catch(err => {
               console.error(err);
           })
@@ -119,7 +120,7 @@ export default {
         margin: auto;
         transform: translateY(-50%);
         max-width: 100%;
-        min-width: 200px;
+        min-width: 350px;
         width: 20%;
     }
 </style>
