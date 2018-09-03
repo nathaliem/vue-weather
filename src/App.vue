@@ -57,7 +57,7 @@ export default {
       });
     },
     getDataWithIP() {
-      this.$http.get('http://ip-api.com/json').then(response => {
+      this.$http.get('https://ipapi.co/json').then(response => {
         if (response.body && response.body.city !== '') {
           this.setCity(response.body.city);
         }
