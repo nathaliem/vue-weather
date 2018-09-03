@@ -1,5 +1,6 @@
 # Vue weather
 Getting the current weather for your location (or one of your choice).
+
 Again, playing around with VueJS. :)
 
 @TODO:
@@ -10,7 +11,9 @@ Again, playing around with VueJS. :)
 ## Development
 
 Run `npm install`.
+
 Copy the `src/config/keys.example.js` to a new file `src/config/keys.js` in the same folder and add your own keys accordingly.
+
 Run `npm run serve`.
 
 ## Build
