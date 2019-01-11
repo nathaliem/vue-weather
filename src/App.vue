@@ -11,6 +11,7 @@
 <script>
 import WeatherContent from './components/WeatherContent.vue'
 import Search from './components/Search.vue'
+import keys from './config/keys'
 
 export default {
   name: 'app',
@@ -37,7 +38,8 @@ export default {
           params: {
             latlng: pos.coords.latitude + ',' + pos.coords.longitude,
             sensor: true,
-            language: 'en'
+            language: 'en',
+            key: keys.google.key
           }
         }).then(response => {
             if (response.body.results) {

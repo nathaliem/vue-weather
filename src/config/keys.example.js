@@ -5,5 +5,8 @@ export default {
     },
     openweathermap: {
         key: ''
+    },
+    google: {
+        key: ''
     }
 }
